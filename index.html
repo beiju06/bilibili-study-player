@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bilibili Study Player</title>
+
+<style>
+body{
+background:#0f0f0f;
+color:white;
+font-family:sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+text-align:center;
+}
+
+input{
+width:400px;
+padding:10px;
+background:#1c1c1c;
+border:1px solid #333;
+color:white;
+}
+
+button{
+margin-top:10px;
+padding:10px 20px;
+background:#ff6699;
+border:none;
+color:white;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Bilibili Study Player</h1>
+
+<p>粘贴B站视频链接<br>Paste Bilibili video link</p>
+
+<input id="linkInput" placeholder="https://b23.tv/...">
+
+<br>
+
+<button onclick="start()">Start</button>
+
+</div>
+
+<script>
+
+function start(){
+
+let link=document.getElementById("linkInput").value;
+
+if(!link){
+alert("请输入链接 / Please enter link");
+return;
+}
+
+window.location="player.html?url="+encodeURIComponent(link);
+
+}
+
+</script>
+
+</body>
+</html>
