@@ -1,14 +1,106 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <meta charset="UTF-8">
-<title>Player</title>
+
+<title>Bilibili Study Player</title>
+
+<style>
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:sans-serif;
+margin:0;
+}
+
+.topbar{
+padding:10px;
+background:#1c1c1c;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+iframe{
+width:100%;
+height:80vh;
+border:none;
+}
+
+button{
+padding:6px 12px;
+background:#ff6699;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+</style>
+
 </head>
 
-<body style="background:#0f0f0f;color:white;">
+<body>
 
-<h1>Video Player</h1>
-<p>播放器开发中...</p>
+<div class="topbar">
+
+<div id="videoInfo">Loading...</div>
+
+<button onclick="goBack()">Back</button>
+
+</div>
+
+<iframe id="player"></iframe>
+
+<script>
+
+function goBack(){
+window.location="index.html";
+}
+
+function getParam(name){
+let url=new URL(window.location.href);
+return url.searchParams.get(name);
+}
+
+let url=getParam("url");
+
+if(!url){
+document.getElementById("videoInfo").innerText="Invalid link";
+}
+
+function extractBV(link){
+
+let match=link.match(/BV[a-zA-Z0-9]+/);
+
+if(match){
+return match[0];
+}
+
+return null;
+
+}
+
+let bv=extractBV(url);
+
+if(bv){
+
+document.getElementById("videoInfo").innerText=bv;
+
+let playerUrl="https://player.bilibili.com/player.html?bvid="+bv+"&danmaku=1";
+
+document.getElementById("player").src=playerUrl;
+
+}else{
+
+document.getElementById("videoInfo").innerText="Cannot parse BV id";
+
+}
+
+</script>
 
 </body>
+
 </html>
