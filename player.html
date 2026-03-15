@@ -24,12 +24,6 @@ justify-content:space-between;
 align-items:center;
 }
 
-#speedArea span{
-margin-left:10px;
-cursor:pointer;
-color:#ff6699;
-}
-
 #cover{
 width:320px;
 border-radius:10px;
@@ -80,8 +74,6 @@ background:white;
 <div class="topbar">
 
 <button onclick="goBack()">Back</button>
-
-<div id="speedArea"></div>
 
 </div>
 
@@ -176,7 +168,7 @@ let playerUrl;
 if(id.startsWith("BV")){
 playerUrl="https://player.bilibili.com/player.html?bvid="+id+"&danmaku=1";
 }else{
-playerUrl="https://player.bilibili.com/player.html?aid="+id.replace("av","")+"&danmaku=1";
+playerUrl="https://player.bilibili.com/player.html?aid="+id.replace("av","")+"&danmaku=1&autoplay=1&high_quality=1";
 }
 
 let player=document.getElementById("player");
@@ -186,35 +178,6 @@ player.src=playerUrl;
 player.style.display="block";
 
 };
-
-const speeds=[0.75,1,1.25,1.5,2];
-
-let speedArea=document.getElementById("speedArea");
-
-speeds.forEach(function(s){
-
-let btn=document.createElement("span");
-
-btn.innerText=s+"x";
-
-btn.onclick=function(){
-
-let player=document.getElementById("player");
-
-if(player.contentWindow){
-
-player.contentWindow.postMessage({
-command:"setPlaybackRate",
-value:s
-},"*");
-
-}
-
-};
-
-speedArea.appendChild(btn);
-
-});
 
 </script>
 
